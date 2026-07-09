@@ -1,0 +1,29 @@
+{
+  "name": "@oasisomniverse/nextjs",
+  "version": "1.0.0",
+  "description": "OASIS Omniverse Next.js UI components",
+  "keywords": ["oasis", "omniverse", "nextjs", "next", "react", "components"],
+  "author": "NextGenSoftware",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NextGenSoftwareUK/OASIS-NextJS-UI-Component-Library.git"
+  },
+  "main": "src/index.ts",
+  "module": "src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./components/*": "./src/components/*.tsx"
+  },
+  "files": ["src"],
+  "peerDependencies": {
+    "next": ">=14.0.0",
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0",
+    "@oasisomniverse/web4-api": ">=2.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {}
+}
