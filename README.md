@@ -13,29 +13,29 @@ npm install @oasisomniverse/nextjs
 
 ## Basic Usage
 
-Components are client components and must be used with `'use client'` in App Router:
+All components include `'use client'` internally. In App Router, import and use them directly:
 
 ```tsx
-'use client';
+import { AvatarConnect, KarmaToast, showKarmaToast } from '@oasisomniverse/nextjs';
 
-import { Login, AvatarConnect, KarmaToast } from '@oasisomniverse/nextjs';
-
-const config = { apiUrl: 'https://api.web4.oasisomniverse.one' };
-
-export default function Page() {
+// Render once in your root layout:
+export default function RootLayout({ children }) {
   return (
-    <>
-      <AvatarConnect config={config} onLogin={(s) => console.log(s)} />
-      <Login config={config} onSuccess={(s) => console.log(s)} />
-      <KarmaToast message="Quest completed" amount={150} />
-    </>
+    <html>
+      <body>
+        <AvatarConnect onLogin={(s) => console.log(s)} />
+        <KarmaToast />
+        {children}
+      </body>
+    </html>
   );
 }
+
+// Trigger toast from anywhere:
+showKarmaToast({ message: 'Quest completed', amount: 150 });
 ```
 
-For Pages Router, import directly without `'use client'`.
-
-All components accept a `config` prop `{ apiUrl: string }`. Omit it to use the default API endpoint.
+The API endpoint is configured in `src/config/api.js` — set `API_BASE_URL` there. Most newer components also accept `apiUrl` and `sessionKey` props to override it per-instance.
 
 ---
 
@@ -193,16 +193,26 @@ Password reset form — use with the token from the reset email link.
 
 #### `<KarmaToast>`
 
-Floating karma notification.
+Singleton toast — render it once (e.g. in your root layout), then trigger it imperatively via `showKarmaToast()`.
 
 ```tsx
-<KarmaToast message="Quest completed" amount={150} />
+import { KarmaToast, showKarmaToast } from '@oasisomniverse/nextjs';
+
+// In root layout:
+<KarmaToast />
+
+// Anywhere:
+showKarmaToast({ message: 'Quest completed', amount: 150 });
+showKarmaToast({ message: 'Penalty applied', amount: -20, duration: 5000 });
 ```
 
-| Prop | Type | Description |
-|---|---|---|
-| `message` | `string` | Reason text shown below the karma amount |
-| `amount` | `number` | Karma delta — positive shown in cyan, negative in red |
+`showKarmaToast` options:
+
+| Option | Type | Default | Description |
+|---|---|---|---|
+| `message` | `string` | **required** | Reason text shown below the karma amount |
+| `amount` | `number` | **required** | Karma delta — positive shown in cyan, negative in red |
+| `duration` | `number` | `4000` | Auto-dismiss delay in milliseconds |
 
 ---
 
