@@ -10,6 +10,8 @@ export * from './components/common/KarmaToast';
 export * from './components/common/Map';
 export * from './components/common/MenuMessage';
 export * from './components/common/Messaging';
+export * from './components/common/OASISMessaging';
+export * from './components/common/OASISChatWidget';
 export * from './components/common/Mission';
 export * from './components/common/NavBar';
 export * from './components/common/NFT';

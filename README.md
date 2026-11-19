@@ -375,3 +375,19 @@ See the full component matrix at **[oportal.oasisomniverse.one](https://oportal.
 - [OASIS API Docs](https://oasis-web4.gitbook.io/oasis-web4-docs/)
 - [Developer Portal](https://oportal.oasisomniverse.one)
 - [OASIS Platform](https://oasisomniverse.one)
+
+## Offline-first messaging
+
+Complete chat for any signed-in avatar (OASIS SSO / HerzID): conversations, groups, delivery and read receipts,
+typing, an offline banner, and a message outbox that sends when the network returns. Powered by
+`@oasisomniverse/web4-api/messaging` (>= 2.1.0).
+
+```tsx
+import { OASISMessaging, OASISChatWidget } from '@oasisomniverse/nextjs';
+
+<OASISMessaging client={oasis} theme="oasis" />   // client: signed-in OASISClient (client component)
+<OASISChatWidget client={oasis} />
+```
+
+Theme with CSS variables: `--oasis-chat-bg`, `--oasis-chat-fg`, `--oasis-chat-accent`, `--oasis-chat-muted`,
+`--oasis-chat-bubble-own`, `--oasis-chat-bubble-other`, `--oasis-chat-border` (or `theme="oasis|dark|light"`).
